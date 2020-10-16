@@ -66,6 +66,11 @@ public class WatchlistController {
             return new ModelAndView("watchlistItemForm");
         }
 		
+		if (itemAlreadyExists(watchlistItem.getTitle())) {
+			bindingResult.rejectValue("title", "", "This movie is already on your watchlist");
+            return new ModelAndView("watchlistItemForm");
+		}
+		
 		WatchlistItem existingItem = findWatchlistItemById(watchlistItem.getId());
 		
 		if (existingItem == null) {
@@ -95,5 +100,15 @@ public class WatchlistController {
 		
 		return new ModelAndView(viewName,model);
 		
+	}
+	
+	private boolean itemAlreadyExists(String title) {
+		
+		for (WatchlistItem watchlistItem : watchlistItems) {
+			if (watchlistItem.getTitle().equals(title)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
