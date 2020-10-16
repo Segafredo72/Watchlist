@@ -3,10 +3,13 @@ package com.openclassrooms.watchlist;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@GoodMovie
 public class WatchlistItem {
 
 	private Integer id;
 	private String rating; 
+	
+	@Priority
 	private String priority;
 	
 	@Size(max=50,  message="Comment should be maximum 50 characters")
